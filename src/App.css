@@ -1,0 +1,12 @@
+.main-container {
+  background: linear-gradient(135deg, var(--bg-main), var(--bg-main-light));
+  height: 100%;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
