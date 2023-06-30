@@ -1,0 +1,50 @@
+.options_container {
+  height: auto;
+  overflow: hidden;
+}
+
+.options {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.options .delimiter {
+  width: 1px;
+  height: 20px;
+  background-color: var(--color);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.options li {
+  width: 50%;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.options li:hover {
+  background-color: var(--bg-main-light);
+}
+
+.timers_slider {
+  display: flex;
+  position: relative;
+  right: 0%;
+  transition: all 0.4s ease;
+}
+
+.timers_slider.slide {
+  right: 100%;
+}
+
+.timer_container {
+  min-width: 100%;
+}
