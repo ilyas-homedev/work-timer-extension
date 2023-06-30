@@ -1,11 +1,18 @@
 :root {
-  --bg-main: #212121;
+  --bg-main: #f5f2eb;
+  --bg-main-light: #fff;
+  --color: #212121;
+  --gray-100: #808080;
+  --gray-dark: #4a4a4a;
+  --black: #000000;
 }
 
 html {
   border: 1px solid #000;
   border-radius: 4px;
-  width: 400px;
+  width: 100vw;
+  height: 100vh;
+  background-color: #a5b6c4;
 }
 
 body {
@@ -18,9 +25,26 @@ body {
   width: 400px;
   height: 400px;
   margin: 0 auto;
+  color: var(--color);
+}
+
+body.dark {
+  --bg-main: #212121;
+  --bg-main-light: #303030;
+  --color: #fff;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+button {
+  cursor: pointer;
 }
