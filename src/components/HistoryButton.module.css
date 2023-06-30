@@ -1,0 +1,59 @@
+.historyBtn {
+  display: flex;
+  background-color: var(--bg-main);
+  color: var(--color);
+  height: 25px;
+  max-width: 25px;
+  padding: 3px 6px;
+  border: 1px solid var(--gray-dark);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.2s linear;
+  position: relative;
+}
+
+.historyBtn:hover {
+  max-width: 100px;
+  background-color: var(--bg-main-light);
+}
+
+.historyBtn:hover .iconContainer {
+  background-color: var(--bg-main-light);
+}
+
+.historyBtn:hover svg {
+  transform: scale(0.9);
+}
+
+.historyBtn span {
+  margin-right: 20px;
+  letter-spacing: 1px;
+}
+
+.historyBtn.back {
+  max-width: none;
+  width: auto;
+}
+
+.historyBtn.back .iconContainer svg {
+  transform: rotate(90deg);
+}
+
+.iconContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--bg-main);
+  width: 23px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  transition: all 0.2s linear;
+}
+
+.iconContainer svg {
+  fill: var(--color);
+  transition: all 0.2s linear;
+}
