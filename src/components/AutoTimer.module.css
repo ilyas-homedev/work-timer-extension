@@ -1,0 +1,11 @@
+.auto_timer_container {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: 3fr 1fr;
+}
+
+.auto_timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
