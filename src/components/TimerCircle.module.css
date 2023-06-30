@@ -1,0 +1,20 @@
+.outer_circle,
+.middle_circle,
+.inner_circle {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-main-light);
+}
+
+.middle_circle {
+  background-color: orange;
+  box-shadow: 0 0 6px orange;
+}
+
+.inner_circle {
+  width: 90%;
+  height: 90%;
+  background-color: var(--bg-main);
+}
