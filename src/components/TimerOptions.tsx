@@ -13,11 +13,15 @@ function TimerOptions() {
 
   return (
     <div className={classes.options_container}>
-      <ul className={classes.options} onClick={chooseOptionHandler}>
+      <div className={classes.options} onClick={chooseOptionHandler}>
         <span className={classes.delimiter}></span>
-        <li id="auto">Auto</li>
-        <li id="manual">Manual</li>
-      </ul>
+        <button id="auto" className={`${!isManual ? classes.active : ""}`}>
+          Auto
+        </button>
+        <button id="manual" className={`${isManual ? classes.active : ""}`}>
+          Manual
+        </button>
+      </div>
       <div
         className={`${classes.timers_slider} ${isManual ? classes.slide : ""}`}
       >

@@ -23,15 +23,22 @@
   margin: auto;
 }
 
-.options li {
+.options button {
   width: 50%;
   padding: 10px;
   text-align: center;
-  cursor: pointer;
+  background-color: transparent;
+  font-size: 16px;
+  transition: all 0.2s linear;
 }
 
-.options li:hover {
+.options button:hover {
   background-color: var(--bg-main-light);
+  color: var(--orange);
+}
+
+.options button.active {
+  color: var(--orange);
 }
 
 .timers_slider {
