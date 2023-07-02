@@ -12,9 +12,9 @@
   box-shadow: 4px 4px 10px -1px rgba(0, 0, 0, 0.5);
 }
 
-.outer_circle svg {
+/* .outer_circle svg {
   position: absolute;
-}
+} */
 
 .inner_circle {
   background-color: var(--bg-main);

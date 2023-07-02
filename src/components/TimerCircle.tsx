@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import classes from "./TimerCircle.module.css";
 import Circle from "../icons/Circle";
+import CircleAnimation from "./styled/CircleAnimation";
 
 type TimerCircleType = {
   width: number;
@@ -15,12 +16,24 @@ function TimerCircle({
   children,
 }: PropsWithChildren<TimerCircleType>) {
   const innerCircleWidth = `${width - 2 * strokeWidth}px`;
+  const strokeDashoffset = Math.PI * (width - strokeWidth);
+
   return (
     <div
       style={{ width: width, height: width }}
       className={classes.outer_circle}
     >
-      <Circle width={width} strokeWidth={strokeWidth} />
+      <CircleAnimation
+        width={width}
+        strokeWidth={strokeWidth}
+        strokeDashoffset={strokeDashoffset}
+      >
+        <Circle
+          width={width}
+          strokeWidth={strokeWidth}
+          strokeDashoffset={strokeDashoffset}
+        />
+      </CircleAnimation>
       <div
         style={{
           width: innerCircleWidth,
