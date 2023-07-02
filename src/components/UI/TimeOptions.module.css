@@ -1,0 +1,75 @@
+.options_container {
+  position: absolute;
+  height: 120px;
+  background-color: var(--bg-main-light);
+  width: 50px;
+  top: -125px;
+  border: 1px solid var(--gray-dark);
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.options_container ul::-webkit-scrollbar {
+  display: none;
+}
+
+.options_container ul {
+  overflow-y: scroll;
+  scroll-snap-stop: normal;
+  overscroll-behavior-y: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.option_item {
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.option_item:hover {
+  background-color: var(--gray-dark);
+  color: var(--orange);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 120px;
+  box-shadow: inset 0px -6px 10px var(--shadow),
+    inset 0px 6px 10px var(--shadow);
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.bounce_top {
+  animation: bounce_top 0.3s ease;
+}
+
+.bounce_bottom {
+  animation: bounce_bottom 0.3s ease;
+}
+
+@keyframes bounce_top {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes bounce_bottom {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
