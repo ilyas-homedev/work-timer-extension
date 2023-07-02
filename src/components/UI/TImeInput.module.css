@@ -1,0 +1,50 @@
+.time_group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.time_group:hover .value_changer_btn svg {
+  fill: var(--color);
+}
+
+.time_group:focus-within svg {
+  fill: var(--color);
+}
+
+.time_input {
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  border-bottom: 1px solid var(--gray-dark);
+}
+
+.value_changer_btn {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.value_changer_btn,
+.value_changer_btn svg {
+  background-color: transparent;
+  fill: transparent;
+  transition: all 0.2s linear;
+}
+
+.value_changer_btn svg {
+  pointer-events: none;
+  transform: scale(1);
+  transition: all 0.1s linear;
+}
+
+.value_changer_btn:hover {
+  background-color: var(--bg-main-light);
+}
+
+.time_group button.value_changer_btn:hover svg {
+  fill: var(--orange);
+}
+
+.mousedown svg {
+  transform: scale(0.6);
+}
