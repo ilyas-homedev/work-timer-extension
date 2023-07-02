@@ -1,11 +1,25 @@
-.auto_timer_container {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  grid-template-rows: 3fr 1fr;
-}
-
 .auto_timer {
+  padding: 30px 0 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.time_set {
+  display: flex;
+}
+
+.time_set span {
+  line-height: 18px;
+  font-size: 18px;
+}
+
+.inputs_container {
+  display: flex;
+  border: 1px solid var(--gray-dark);
+  border-radius: 4px;
+  padding: 0 5px;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
 }
