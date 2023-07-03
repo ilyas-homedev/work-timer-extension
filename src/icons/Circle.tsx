@@ -2,15 +2,22 @@ type CircleType = {
   width: number;
   strokeWidth: number;
   strokeDashoffset: number;
+  className: string;
 };
 
-function Circle({ width, strokeWidth, strokeDashoffset }: CircleType) {
+function Circle({
+  width,
+  strokeWidth,
+  strokeDashoffset,
+  className,
+}: CircleType) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       width={width}
       height={width}
+      className={className}
       // style={{ transform: "rotate(-90deg)" }}
     >
       <defs>
@@ -23,7 +30,7 @@ function Circle({ width, strokeWidth, strokeDashoffset }: CircleType) {
         cx={`${width / 2}`}
         cy={`${width / 2}`}
         r={`${(width - strokeWidth) / 2}`}
-        // stroke-linecap="round"
+        // strokeLinecap="butt"
         style={
           {
             // fill: "none",
