@@ -7,7 +7,7 @@ function App() {
   const [historyIsOpened, setHistoryIsOpened] = useState(false);
 
   return (
-    <div className="main-container" style={{ height: "400px" }}>
+    <div className="main-container">
       <div className="header">
         <h1>Work Timer</h1>
         <HistoryButton
