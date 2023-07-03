@@ -1,6 +1,7 @@
 import { SyntheticEvent, useState } from "react";
 import ArrowDownIcon from "../../icons/ArrowDownIcon";
 import TimeOptions from "./TimeOptions";
+import { formatTime } from "../../helpers/formatTime";
 import classes from "./TimeInput.module.css";
 
 type TimerInputType = {
@@ -11,9 +12,10 @@ type TimerInputType = {
 function TimeInput({ id, range }: TimerInputType) {
   let numbersArray: number[] = [];
 
+  const [inputValue, setInputValue] = useState<string>("00");
   const [optionsIsVisible, setOptionsIsVisible] = useState(false);
 
-  for (let i = 0; i < range; i++) {
+  for (let i = 0; i <= range; i++) {
     numbersArray.push(i);
   }
 
@@ -32,7 +34,51 @@ function TimeInput({ id, range }: TimerInputType) {
   function chooseTimeHandler(event: SyntheticEvent) {
     const target = event.target as HTMLLIElement;
 
-    console.log(target.textContent);
+    setInputValue(formatTime(+target.textContent!));
+  }
+
+  function focusHandler() {
+    setOptionsIsVisible(true);
+
+    if (+inputValue) {
+      setInputValue((prev) => {
+        const prevNum = +prev;
+        return prevNum.toString();
+      });
+    } else {
+      setInputValue("");
+    }
+  }
+
+  function blurHandler() {
+    setInputValue(formatTime(+inputValue));
+    setOptionsIsVisible(false);
+  }
+
+  function changeHandler(event: SyntheticEvent) {
+    const target = event.target as HTMLInputElement;
+
+    const onlyNumbers = target.value.replaceAll(/\D/g, "");
+
+    setInputValue(onlyNumbers.slice(0, 2));
+  }
+
+  function increaseTimeValue() {
+    setInputValue((prev) => {
+      if (+prev < range) {
+        return (+prev + 1).toString();
+      }
+      return range.toString();
+    });
+  }
+
+  function decreaseTimeValue() {
+    setInputValue((prev) => {
+      if (+prev > 0) {
+        return (+prev - 1).toString();
+      }
+      return "0";
+    });
   }
 
   return (
@@ -43,9 +89,10 @@ function TimeInput({ id, range }: TimerInputType) {
       <button
         id="increase"
         className={classes.value_changer_btn}
+        style={{ transform: "rotate(180deg)" }}
         onMouseDown={mouseDownHandler}
         onMouseUp={mouseUpHandler}
-        style={{ transform: "rotate(180deg)" }}
+        onClick={increaseTimeValue}
       >
         <ArrowDownIcon />
       </button>
@@ -53,14 +100,19 @@ function TimeInput({ id, range }: TimerInputType) {
         id={id}
         type="text"
         className={classes.time_input}
-        onFocus={() => setOptionsIsVisible(true)}
-        onBlur={() => setOptionsIsVisible(false)}
+        value={inputValue}
+        onFocus={focusHandler}
+        onBlur={blurHandler}
+        onChange={changeHandler}
+        placeholder="00"
+        autoComplete="off"
       />
       <button
         id="decrease"
         className={classes.value_changer_btn}
         onMouseDown={mouseDownHandler}
         onMouseUp={mouseUpHandler}
+        onClick={decreaseTimeValue}
       >
         <ArrowDownIcon />
       </button>
