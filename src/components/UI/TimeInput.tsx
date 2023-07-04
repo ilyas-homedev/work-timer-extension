@@ -66,18 +66,18 @@ function TimeInput({ id, range }: TimerInputType) {
   function increaseTimeValue() {
     setInputValue((prev) => {
       if (+prev < range) {
-        return (+prev + 1).toString();
+        return formatTime(+prev + 1);
       }
-      return range.toString();
+      return formatTime(range);
     });
   }
 
   function decreaseTimeValue() {
     setInputValue((prev) => {
       if (+prev > 0) {
-        return (+prev - 1).toString();
+        return formatTime(+prev - 1);
       }
-      return "0";
+      return formatTime(0);
     });
   }
 
