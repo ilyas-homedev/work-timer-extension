@@ -9,8 +9,8 @@ function AutoTimer() {
         <TimerCircle width={170} strokeWidth={12} />
       </div>
       <div className={classes.time_set}>
-        <SetTime label="work" />
-        <SetTime label="rest" />
+        <SetTime groupName="work" label="work" />
+        <SetTime groupName="rest" label="rest" />
       </div>
     </div>
   );
