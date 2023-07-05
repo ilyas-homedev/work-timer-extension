@@ -3,6 +3,7 @@ type CircleType = {
   strokeWidth: number;
   strokeDashoffset: number;
   className: string;
+  timeout: number;
 };
 
 function Circle({
@@ -10,6 +11,7 @@ function Circle({
   strokeWidth,
   strokeDashoffset,
   className,
+  timeout,
 }: CircleType) {
   return (
     <svg
@@ -18,7 +20,7 @@ function Circle({
       width={width}
       height={width}
       className={className}
-      // style={{ transform: "rotate(-90deg)" }}
+      style={{ transform: "rotate(-90deg)" }}
     >
       <defs>
         <linearGradient id="GradientColor">
@@ -31,15 +33,14 @@ function Circle({
         cy={`${width / 2}`}
         r={`${(width - strokeWidth) / 2}`}
         // strokeLinecap="butt"
-        style={
-          {
-            // fill: "none",
-            // stroke: "orange",
-            // strokeWidth: `${strokeWidth}px`,
-            // strokeDasharray: `${strokeDashoffset}`,
-            // strokeDashoffset: `${(strokeDashoffset * 50) / 100}`,
-          }
-        }
+        style={{
+          fill: "none",
+          stroke: "orange",
+          strokeWidth: `${strokeWidth}px`,
+          strokeDasharray: `${strokeDashoffset}`,
+          strokeDashoffset: `${strokeDashoffset}`,
+          transition: `all ${timeout}s linear`,
+        }}
       />
     </svg>
   );
