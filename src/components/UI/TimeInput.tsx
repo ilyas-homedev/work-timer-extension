@@ -1,22 +1,36 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useContext, useState } from "react";
 import ArrowDownIcon from "../../icons/ArrowDownIcon";
 import TimeOptions from "./TimeOptions";
 import { formatTime } from "../../helpers/formatTime";
 import classes from "./TimeInput.module.css";
+import { TimerContext } from "../../context/ContextProvider";
 
 type TimerInputType = {
   id: string;
   range: number;
+  groupName: string;
 };
 
-function TimeInput({ id, range }: TimerInputType) {
+function TimeInput({ id, range, groupName }: TimerInputType) {
   let numbersArray: number[] = [];
 
-  const [inputValue, setInputValue] = useState<string>("00");
+  // const [inputValue, setInputValue] = useState<string>("00");
   const [optionsIsVisible, setOptionsIsVisible] = useState(false);
+
+  const [timeValues, setTime] = useContext(TimerContext);
+
+  const inputValue = timeValues[groupName][id];
 
   for (let i = 0; i <= range; i++) {
     numbersArray.push(i);
+  }
+
+  function setTimeToContext(value: string | (() => string)) {
+    if (typeof value === "function") {
+      setTime(value(), groupName, id);
+      return;
+    }
+    setTime(value, groupName, id);
   }
 
   function mouseDownHandler(event: SyntheticEvent) {
@@ -34,24 +48,26 @@ function TimeInput({ id, range }: TimerInputType) {
   function chooseTimeHandler(event: SyntheticEvent) {
     const target = event.target as HTMLLIElement;
 
-    setInputValue(formatTime(+target.textContent!));
+    setTimeToContext(formatTime(+target.textContent!));
   }
 
   function focusHandler() {
     setOptionsIsVisible(true);
 
     if (+inputValue) {
-      setInputValue((prev) => {
-        const prevNum = +prev;
-        return prevNum.toString();
-      });
+      // setTimeToContext((prev) => {
+      //   const prevNum = +prev;
+      //   return prevNum.toString();
+      // });
+      const stringInputValue = parseInt(inputValue).toString();
+      setTimeToContext(stringInputValue);
     } else {
-      setInputValue("");
+      setTimeToContext("");
     }
   }
 
   function blurHandler() {
-    setInputValue(formatTime(+inputValue));
+    setTimeToContext(formatTime(+inputValue));
     setOptionsIsVisible(false);
   }
 
@@ -60,25 +76,35 @@ function TimeInput({ id, range }: TimerInputType) {
 
     const onlyNumbers = target.value.replaceAll(/\D/g, "");
 
-    setInputValue(onlyNumbers.slice(0, 2));
+    setTimeToContext(onlyNumbers.slice(0, 2));
   }
 
   function increaseTimeValue() {
-    setInputValue((prev) => {
-      if (+prev < range) {
-        return formatTime(+prev + 1);
-      }
-      return formatTime(range);
-    });
+    // setInputValue((prev) => {
+    //   if (+prev < range) {
+    //     return formatTime(+prev + 1);
+    //   }
+    //   return formatTime(range);
+    // });
+    if (+inputValue < range) {
+      setTimeToContext(formatTime(+inputValue + 1));
+    } else {
+      setTimeToContext(formatTime(range));
+    }
   }
 
   function decreaseTimeValue() {
-    setInputValue((prev) => {
-      if (+prev > 0) {
-        return formatTime(+prev - 1);
-      }
-      return formatTime(0);
-    });
+    // setInputValue((prev) => {
+    //   if (+prev > 0) {
+    //     return formatTime(+prev - 1);
+    //   }
+    //   return formatTime(0);
+    // });
+    if (+inputValue > 0) {
+      setTimeToContext(formatTime(+inputValue - 1));
+    } else {
+      setTimeToContext(formatTime(0));
+    }
   }
 
   return (
