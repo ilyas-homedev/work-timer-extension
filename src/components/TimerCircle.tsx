@@ -1,7 +1,7 @@
 import { PropsWithChildren, useState } from "react";
 import classes from "./TimerCircle.module.css";
 import Circle from "../icons/Circle";
-import CircleAnimation from "./styled/CircleAnimation";
+// import CircleAnimation from "./styled/CircleAnimation";
 
 type TimerCircleType = {
   width: number;
@@ -17,12 +17,14 @@ function TimerCircle({
 }: PropsWithChildren<TimerCircleType>) {
   const innerCircleWidth = `${width - 2 * strokeWidth}px`;
   const strokeDashoffset = Math.PI * (width - strokeWidth);
-
+  // const circumferenceLength = useRef()
   const [timerStarted, setTimerStarted] = useState(false);
 
   function startTimer() {
     setTimerStarted(true);
-    // const timer = setTimeout(() => {}, 10000);
+    // const timer = setTimeout(() => {
+    //   setTimerStarted(false);
+    // }, 5000);
   }
 
   return (
@@ -30,19 +32,20 @@ function TimerCircle({
       style={{ width: width, height: width }}
       className={classes.outer_circle}
     >
-      <CircleAnimation
+      {/* <CircleAnimation
         width={width}
         strokeWidth={strokeWidth}
         strokeDashoffset={strokeDashoffset}
         timeout={10}
-      >
-        <Circle
-          width={width}
-          strokeWidth={strokeWidth}
-          strokeDashoffset={strokeDashoffset}
-          className={timerStarted ? "timer_start" : ""}
-        />
-      </CircleAnimation>
+      > */}
+      <Circle
+        width={width}
+        strokeWidth={strokeWidth}
+        strokeDashoffset={strokeDashoffset}
+        className={timerStarted ? classes.timer_start : ""}
+        timeout={1}
+      />
+      {/* </CircleAnimation> */}
       <div
         style={{
           width: innerCircleWidth,

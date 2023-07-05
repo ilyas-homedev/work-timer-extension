@@ -19,3 +19,7 @@
     0.5px 0.5px 0px rgba(0, 0, 0, 0.5), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
   position: absolute;
 }
+
+.timer_start circle {
+  stroke-dashoffset: 0 !important;
+}
