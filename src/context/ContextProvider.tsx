@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useState } from "react";
+import { PropsWithChildren, createContext, useCallback, useState } from "react";
 
 interface ITimeValues {
   [work: string]: { [hours: string]: string; minutes: string };
@@ -21,19 +21,20 @@ function ContextProvider({ children }: PropsWithChildren) {
     rest: { hours: "00", minutes: "00" },
   });
 
-  function setTime(value: string, groupName: string, unitOfTime: string) {
-    setTimeValues((prev) => {
-      return {
-        ...prev,
-        [groupName]: {
-          ...prev[groupName as keyof typeof timeValues],
-          [unitOfTime]: value,
-        },
-      };
-    });
-  }
-
-  console.log(timeValues);
+  const setTime = useCallback(
+    (value: string, groupName: string, unitOfTime: string) => {
+      setTimeValues((prev) => {
+        return {
+          ...prev,
+          [groupName]: {
+            ...prev[groupName as keyof typeof timeValues],
+            [unitOfTime]: value,
+          },
+        };
+      });
+    },
+    []
+  );
 
   return (
     <TimerContext.Provider value={[timeValues, setTime]}>
