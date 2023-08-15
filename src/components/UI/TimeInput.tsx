@@ -1,5 +1,5 @@
-import { SyntheticEvent, useContext, useState } from "react";
-import ArrowDownIcon from "../../icons/ArrowDownIcon";
+import { SyntheticEvent, useEffect, useContext, useState } from "react";
+import ArrowDownIcon from "../icons/ArrowDownIcon";
 import TimeOptions from "./TimeOptions";
 import { formatTime } from "../../helpers/formatTime";
 import classes from "./TimeInput.module.css";
@@ -14,23 +14,17 @@ type TimerInputType = {
 function TimeInput({ id, range, groupName }: TimerInputType) {
   let numbersArray: number[] = [];
 
-  // const [inputValue, setInputValue] = useState<string>("00");
+  const [inputValue, setInputValue] = useState<string>("00");
   const [optionsIsVisible, setOptionsIsVisible] = useState(false);
 
-  const [timeValues, setTime] = useContext(TimerContext);
+  const [_, setTime] = useContext(TimerContext);
 
-  const inputValue = timeValues[groupName][id];
+  useEffect(() => {
+    setTime(inputValue, groupName, id);
+  }, [inputValue]);
 
   for (let i = 0; i <= range; i++) {
     numbersArray.push(i);
-  }
-
-  function setTimeToContext(value: string | (() => string)) {
-    if (typeof value === "function") {
-      setTime(value(), groupName, id);
-      return;
-    }
-    setTime(value, groupName, id);
   }
 
   function mouseDownHandler(event: SyntheticEvent) {
@@ -48,63 +42,49 @@ function TimeInput({ id, range, groupName }: TimerInputType) {
   function chooseTimeHandler(event: SyntheticEvent) {
     const target = event.target as HTMLLIElement;
 
-    setTimeToContext(formatTime(+target.textContent!));
+    setInputValue(formatTime(+target.textContent!));
   }
 
   function focusHandler() {
     setOptionsIsVisible(true);
 
     if (+inputValue) {
-      // setTimeToContext((prev) => {
-      //   const prevNum = +prev;
-      //   return prevNum.toString();
-      // });
       const stringInputValue = parseInt(inputValue).toString();
-      setTimeToContext(stringInputValue);
+      setInputValue(stringInputValue);
     } else {
-      setTimeToContext("");
+      setInputValue("");
     }
   }
 
   function blurHandler() {
-    setTimeToContext(formatTime(+inputValue));
+    setInputValue(formatTime(+inputValue));
     setOptionsIsVisible(false);
   }
 
   function changeHandler(event: SyntheticEvent) {
     const target = event.target as HTMLInputElement;
 
-    const onlyNumbers = target.value.replaceAll(/\D/g, "");
+    const onlyNumbersValue = target.value.replaceAll(/\D/g, "").slice(0, 2);
 
-    setTimeToContext(onlyNumbers.slice(0, 2));
+    setInputValue(onlyNumbersValue);
   }
 
   function increaseTimeValue() {
-    // setInputValue((prev) => {
-    //   if (+prev < range) {
-    //     return formatTime(+prev + 1);
-    //   }
-    //   return formatTime(range);
-    // });
-    if (+inputValue < range) {
-      setTimeToContext(formatTime(+inputValue + 1));
-    } else {
-      setTimeToContext(formatTime(range));
-    }
+    setInputValue((prev) => {
+      if (+prev < range) {
+        return formatTime(+prev + 1);
+      }
+      return formatTime(range);
+    });
   }
 
   function decreaseTimeValue() {
-    // setInputValue((prev) => {
-    //   if (+prev > 0) {
-    //     return formatTime(+prev - 1);
-    //   }
-    //   return formatTime(0);
-    // });
-    if (+inputValue > 0) {
-      setTimeToContext(formatTime(+inputValue - 1));
-    } else {
-      setTimeToContext(formatTime(0));
-    }
+    setInputValue((prev) => {
+      if (+prev > 0) {
+        return formatTime(+prev - 1);
+      }
+      return formatTime(0);
+    });
   }
 
   return (
@@ -114,6 +94,7 @@ function TimeInput({ id, range, groupName }: TimerInputType) {
       )}
       <button
         id="increase"
+        data-testid="increase-button"
         className={classes.value_changer_btn}
         style={{ transform: "rotate(180deg)" }}
         onMouseDown={mouseDownHandler}
@@ -135,6 +116,7 @@ function TimeInput({ id, range, groupName }: TimerInputType) {
       />
       <button
         id="decrease"
+        data-testid="decrease-button"
         className={classes.value_changer_btn}
         onMouseDown={mouseDownHandler}
         onMouseUp={mouseUpHandler}
