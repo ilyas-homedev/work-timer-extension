@@ -1,5 +1,5 @@
 import { SyntheticEvent } from "react";
-import ArrowDownIcon from "../icons/ArrowDownIcon";
+import ArrowDownIcon from "./icons/ArrowDownIcon";
 import classes from "./HistoryButton.module.css";
 
 type HistoryButtonType = {
@@ -13,7 +13,9 @@ function HistoryButton({ onClick, historyIsOpened }: HistoryButtonType) {
       className={`${classes.historyBtn} ${historyIsOpened ? classes.back : ""}`}
       onClick={onClick}
     >
-      <span>{historyIsOpened ? "back" : "history"}</span>
+      <span data-testid="button-text">
+        {historyIsOpened ? "back" : "history"}
+      </span>
       <div className={classes.iconContainer}>
         <ArrowDownIcon />
       </div>
