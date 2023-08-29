@@ -21,7 +21,7 @@ function TimeInput({ id, range, groupName }: TimerInputType) {
 
   useEffect(() => {
     setTime(inputValue, groupName, id);
-  }, [inputValue]);
+  }, [inputValue, groupName, id, setTime]);
 
   for (let i = 0; i <= range; i++) {
     numbersArray.push(i);
@@ -65,6 +65,11 @@ function TimeInput({ id, range, groupName }: TimerInputType) {
     const target = event.target as HTMLInputElement;
 
     const onlyNumbersValue = target.value.replaceAll(/\D/g, "").slice(0, 2);
+
+    if (+onlyNumbersValue > range) {
+      setInputValue(formatTime(range));
+      return;
+    }
 
     setInputValue(onlyNumbersValue);
   }
