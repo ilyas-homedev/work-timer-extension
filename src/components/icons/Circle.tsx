@@ -3,15 +3,15 @@ type CircleType = {
   strokeWidth: number;
   strokeDashoffset: number;
   className: string;
-  timeout: number;
+  transition: string;
 };
 
 function Circle({
   width,
   strokeWidth,
   strokeDashoffset,
-  className,
-  timeout,
+  className = "",
+  transition,
 }: CircleType) {
   return (
     <svg
@@ -35,11 +35,10 @@ function Circle({
         // strokeLinecap="butt"
         style={{
           fill: "none",
-          stroke: "orange",
           strokeWidth: `${strokeWidth}px`,
           strokeDasharray: `${strokeDashoffset}`,
           strokeDashoffset: `${strokeDashoffset}`,
-          transition: `all ${timeout}s linear`,
+          transition: transition,
         }}
       />
     </svg>
