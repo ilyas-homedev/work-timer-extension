@@ -23,3 +23,11 @@
 .timer_start circle {
   stroke-dashoffset: 0 !important;
 }
+
+.work_color {
+  stroke: var(--orange);
+}
+
+.rest_color {
+  stroke: var(--green);
+}
